@@ -1,7 +1,7 @@
 /*
- * Programacion del nodo sensor cisterna 
+ * Programación del nodo sensor cisterna 
  * Por: Equipo 5 
- * Integrates: Alejandro Alejandro Carllo, Ernesto Rafael Leon Cornelio y Miquel Antonio Wister Ovando
+ * Integrantes: Alejandro Alejandro Carrillo, Ernesto Rafael Leon Cornelio y Miquel Antonio Wister Ovando
  * Fecha: 04 de agosto de 2022
  * 
  * En las siguientes lineas de programacion se configura la red de internet, el protocolo mqtt, los topicos para
