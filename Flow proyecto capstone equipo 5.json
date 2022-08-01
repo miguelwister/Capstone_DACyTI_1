@@ -1,0 +1,513 @@
+[
+    {
+        "id": "51e8cdb8e99126f1",
+        "type": "tab",
+        "label": "Flow proyecto capstone equipo 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0fd253cd5cef0fd4",
+        "type": "mqtt in",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "topic": "distance",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "84b1057959605503",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 400,
+        "wires": [
+            [
+                "1965be99ece30d05"
+            ]
+        ]
+    },
+    {
+        "id": "d62f55a502077448",
+        "type": "ui_gauge",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "group": "fcd923da8fafabf6",
+        "order": 2,
+        "width": "5",
+        "height": "5",
+        "gtype": "wave",
+        "title": "Nivel de agua cisterna",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 660,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1965be99ece30d05",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "calculando el procentaje del nodo cisterna",
+        "func": "msg.payload = parseFloat(msg.payload);\n\nmsg.payload = msg.payload -10;\n\nmsg.payload = (msg.payload/40)*100;\n\nmsg.payload =  100 - msg.payload;\n\nresult= msg.payload;\n\nmsg.distance= result;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 360,
+        "wires": [
+            [
+                "d62f55a502077448",
+                "f422b12104e4803d",
+                "368ac44a6359f189"
+            ]
+        ]
+    },
+    {
+        "id": "7d2699cc049ebde7",
+        "type": "mqtt in",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "topic": "caudal",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "84b1057959605503",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 500,
+        "wires": [
+            [
+                "20414dc604ad2655"
+            ]
+        ]
+    },
+    {
+        "id": "20414dc604ad2655",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "cambio de tipo de dato del topico caudal",
+        "func": "msg.payload = parseFloat(msg.payload);\n\nresult= msg.payload;\n\nmsg.caudal = result;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 500,
+        "wires": [
+            [
+                "18d03fe49f9cda95",
+                "073bc4b8d6d5cd2e"
+            ]
+        ]
+    },
+    {
+        "id": "18d03fe49f9cda95",
+        "type": "ui_gauge",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "group": "fcd923da8fafabf6",
+        "order": 3,
+        "width": "5",
+        "height": "5",
+        "gtype": "compass",
+        "title": "Caudal (presión del agua)",
+        "label": "litro/min",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 730,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "195180aee61a56ae",
+        "type": "mqtt in",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "topic": "calidad",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "84b1057959605503",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "0a3c5f1fb9609eb6"
+            ]
+        ]
+    },
+    {
+        "id": "0a3c5f1fb9609eb6",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "cambio de tipo de dato del topico calidad",
+        "func": "msg.payload = parseFloat(msg.payload);\n\nresult= msg.payload;\n\nmsg.calidad = result;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 600,
+        "wires": [
+            [
+                "429c57116c33f21e",
+                "6f2ed9b1f46e0235"
+            ]
+        ]
+    },
+    {
+        "id": "429c57116c33f21e",
+        "type": "ui_gauge",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "group": "fcd923da8fafabf6",
+        "order": 4,
+        "width": "5",
+        "height": "5",
+        "gtype": "compass",
+        "title": "Calidad del agua",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 710,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "f422b12104e4803d",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "asignacion de etiquetas",
+        "func": "var v1 = msg.distance;\n\nmsg.payload = {\n    \n    aguacisterna:v1\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 360,
+        "wires": [
+            [
+                "b75948b4e1ab6226"
+            ]
+        ]
+    },
+    {
+        "id": "073bc4b8d6d5cd2e",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "asignacion de etiquetas",
+        "func": "\nvar v2 = msg.caudal\n\nmsg.payload = {\n    \n\n    Caudal:v2\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 480,
+        "wires": [
+            [
+                "b75948b4e1ab6226"
+            ]
+        ]
+    },
+    {
+        "id": "6f2ed9b1f46e0235",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "asignacion de etiquetas",
+        "func": "\nvar v3 = msg.calidad\n\nmsg.payload = {\n    \n\n    Calidad:v3\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 660,
+        "wires": [
+            [
+                "b75948b4e1ab6226"
+            ]
+        ]
+    },
+    {
+        "id": "6e491875c9115eab",
+        "type": "mqtt in",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "topic": "distance2",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "84b1057959605503",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "7bcfa6060df54a88"
+            ]
+        ]
+    },
+    {
+        "id": "7bcfa6060df54a88",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "calculando el procentaje del nodo tinaco",
+        "func": "msg.payload = parseFloat(msg.payload);\n\nmsg.payload = ((msg.payload -20)/40)*100;\n\nmsg.payload =  100 - msg.payload;\n\nresult= msg.payload;\n\nmsg.distance2= result;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "368ac44a6359f189",
+                "b793d03de49ae1cb",
+                "b6da96ddcb2fd557"
+            ]
+        ]
+    },
+    {
+        "id": "368ac44a6359f189",
+        "type": "join",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 510,
+        "y": 280,
+        "wires": [
+            [
+                "c6520765b9d025a6"
+            ]
+        ]
+    },
+    {
+        "id": "c6520765b9d025a6",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": " condicionante para envio de mqtt bomba",
+        "func": "var v1 = msg.distance;\nvar v2 = msg.distance2;\n\n\n\nif (v1 > 50 && v2 > 80) {\n  msg.payload = \"0\";\n} else if (v1 > 50 && v2 < 90) {\n  msg.payload = \"1\";\n} else {\n  msg.payload = \"0\";\n}\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 280,
+        "wires": [
+            [
+                "74ee297ff08aad45"
+            ]
+        ]
+    },
+    {
+        "id": "74ee297ff08aad45",
+        "type": "mqtt out",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "topic": "Bomba",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "84b1057959605503",
+        "x": 1060,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b793d03de49ae1cb",
+        "type": "ui_gauge",
+        "z": "51e8cdb8e99126f1",
+        "name": "",
+        "group": "fcd923da8fafabf6",
+        "order": 3,
+        "width": "5",
+        "height": "5",
+        "gtype": "wave",
+        "title": "Nivel de agua tinaco",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 680,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "b6da96ddcb2fd557",
+        "type": "function",
+        "z": "51e8cdb8e99126f1",
+        "name": "asignacion de etiquetas",
+        "func": "var v4 = msg.distance2;\n\nmsg.payload = {\n    \n    aguaTinaco:v4\n\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "b75948b4e1ab6226"
+            ]
+        ]
+    },
+    {
+        "id": "b75948b4e1ab6226",
+        "type": "influxdb out",
+        "z": "51e8cdb8e99126f1",
+        "influxdb": "30e621e7ad9155e8",
+        "name": "Base de datos",
+        "measurement": "agua",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1060,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "61150957572d9cd5",
+        "type": "comment",
+        "z": "51e8cdb8e99126f1",
+        "name": "comentarios",
+        "info": "-El nodo \"distance2\" obtiene los datos recibidos del sensor utrasonico del nodo sensor tinaco. \n-El nodo “distance” obtiene los datos recibidos del sensor ultrasónico del nodo sensor cisterna.\n-El nodo nombrado \"caudal\" obtiene los datos recibidos del caudalímetro del nodo sensor cisterna.\n-El nodo \"calculando el porcentaje del nodo tinaco\" parsea el dato del nodo \"distance2\" y a la vez obtiene el porcentaje de agua.\n-El nodo \"calculando el porcentaje del nodo tinaco\" parsea el dato del nodo \"distance2\" y a la vez obtiene el porcentaje de agua que hay presente en el tinaco.\n-El nodo \"calculando el porcentaje del nodo cisterna\" parsea el dato del nodo \"distance\" y a la vez obtiene el porcentaje de agua que hay presente en la cisterna.\n-Los nodos \"cambio de tipo de dato del tópico caudal\" y \"cambio de tipo de dato del tópico calidad\" cambian el tipo de datos que llegan por mqtt.\n-Los nodos \"Nivel de agua tinaco”, “Nivel de agua cisterna”, Caudal (presión del agua)\" y \"Calidad del agua\" nos ayudan a desplegar los datos en el dashboard de node-red.\n-El nodo \"Join\" hace esperar variables diferentes para su posterior procesamiento.\n-Los nodos \"asignacion de etiquetas\" asigna un identificador a las variables.\n-El nodo \"Base de datos\" envía los datos de cada etiqueta a la base de datos.",
+        "x": 140,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "84b1057959605503",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "fcd923da8fafabf6",
+        "type": "ui_group",
+        "name": "SISTEMA DE AGUA DOMESTICA",
+        "tab": "86b45026596b7f7a",
+        "order": 1,
+        "disp": true,
+        "width": "15",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "30e621e7ad9155e8",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "db_agua",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "86b45026596b7f7a",
+        "type": "ui_tab",
+        "name": "UNIVERSIDAD JUAREZ AUTONOMA DE TABASCO (DACyTI)",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
